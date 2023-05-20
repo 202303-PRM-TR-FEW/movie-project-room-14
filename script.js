@@ -79,3 +79,12 @@ const renderMovie = (movie) => {
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
+
+
+//test
+const navbarToggle = document.getElementById('nav');
+const navbarMenu = document.getElementById('navbar');
+
+navbarToggle.addEventListener('click', () => {
+  navbarMenu.classList.toggle('active');
+});
