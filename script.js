@@ -42,34 +42,36 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  CONTAINER.innerHTML = "";
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
 
-  movies.map((movie) => {
-    if (movie.backdrop_path !== null) {
+  movies.forEach((movie) => { // Changed `map` to `forEach` since it's not used for returning a new array
     const colDiv = document.createElement("div");
-    colDiv.classList.add("col-12");
-    colDiv.classList.add("col-md-6");
-    colDiv.classList.add("col-lg-4");
+    colDiv.classList.add("col-md-4");
 
     const movieDiv = document.createElement("div");
     movieDiv.classList.add("card");
-    
-      movieDiv.innerHTML = `
-      <img src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster" class="card-img-top" height="350px">
+    movieDiv.innerHTML = `
+      <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" class="card-img-top">
       <div class="card-body">
-        <h3 class="card-title text-center">${movie.title}</h3>
+        <h3 class="card-title">${movie.title}</h3>
+        <p class="card-rating">${movie.vote_average}</p>
       </div>
     `;
-      movieDiv.addEventListener("click", () => {
-        movieDetails(movie);
-      });
-      colDiv.appendChild(movieDiv);
-      rowDiv.appendChild(colDiv);
-      CONTAINER.appendChild(rowDiv);
-    }
+
+    movieDiv.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+
+    // Add a hover effect and cursor pointer to indicate the card is clickable
+    movieDiv.classList.add("clickable-card");
+
+    colDiv.appendChild(movieDiv);
+    rowDiv.appendChild(colDiv);
   });
+
+  CONTAINER.innerHTML = "";
+  CONTAINER.appendChild(rowDiv);
 
 };
 // function renderMovies(movies){
@@ -120,6 +122,7 @@ const similarMoveies = async (movie) => {
   const res =  await fetch(url)
   return res.json()
 }
+
 
 
 // You'll need to play with this function in order to add features and enhance the style.
