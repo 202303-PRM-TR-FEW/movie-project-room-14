@@ -45,7 +45,7 @@ const renderMovies = (movies) => {
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
 
-  movies.forEach((movie) => { // Changed `map` to `forEach` since it's not used for returning a new array
+  movies.forEach((movie) => {
     const colDiv = document.createElement("div");
     colDiv.classList.add("col-md-4");
 
@@ -65,6 +65,7 @@ const renderMovies = (movies) => {
 
     // Add a hover effect and cursor pointer to indicate the card is clickable
     movieDiv.classList.add("clickable-card");
+    movieDiv.setAttribute("data-movie-overview", movie.overview); // Set the movie overview as an attribute
 
     colDiv.appendChild(movieDiv);
     rowDiv.appendChild(colDiv);
@@ -72,8 +73,8 @@ const renderMovies = (movies) => {
 
   CONTAINER.innerHTML = "";
   CONTAINER.appendChild(rowDiv);
-
 };
+
 // function renderMovies(movies){
 //   CONTAINER.innerHTML = ""
 //   movies.map((movie) => {
